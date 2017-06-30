@@ -20,6 +20,7 @@ class App extends Component {
         data: [],
       }    
     };
+    this.addSpeedDial = this.addSpeedDial.bind(this);
   }
 
   componentDidMount() {
@@ -44,6 +45,13 @@ class App extends Component {
     });
   }
 
+  addSpeedDial(dial) {
+    this.state.dials.custom.push(dial);
+    this.setState({
+      dials: this.state.dials
+    });
+  }
+
   getNews() {
     this.freshtab.getNews().then((data) => {
       this.setState({
@@ -62,8 +70,13 @@ class App extends Component {
           <nav id="nav-left"></nav>
           <section id="content">
             <section id="top">
-              <SpeedDialsRow dials={this.state.dials.history} type="history" />
-              <SpeedDialsRow dials={this.state.dials.custom} type="custom" />
+              <SpeedDialsRow 
+                dials={this.state.dials.history} 
+                type="history"/>
+              <SpeedDialsRow 
+                dials={this.state.dials.custom} 
+                type="custom"
+                addSpeedDial={this.addSpeedDial} />
             </section>
 
             <section id="middle">

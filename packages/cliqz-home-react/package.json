@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "react-scripts": "0.9.5",
+    "react-toggle-display": "^2.2.0",
     "spanan": "^1.2.0"
   },
   "scripts": {
