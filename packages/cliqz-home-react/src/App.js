@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import cliqz from './Cliqz';
 import UrlBar from './UrlBar';
-import SpeedDials from './SpeedDials';
+import SpeedDialsRow from './SpeedDialsRow';
 import News from './News';
 import './App.css';
 
@@ -62,7 +62,8 @@ class App extends Component {
           <nav id="nav-left"></nav>
           <section id="content">
             <section id="top">
-              <SpeedDials dials={this.state.dials} />
+              <SpeedDialsRow dials={this.state.dials.history} type="history" />
+              <SpeedDialsRow dials={this.state.dials.custom} type="custom" />
             </section>
 
             <section id="middle">
