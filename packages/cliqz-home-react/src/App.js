@@ -20,6 +20,8 @@ class App extends Component {
         data: [],
       }    
     };
+
+    this.getSpeedDials = this.getSpeedDials.bind(this);
     this.addSpeedDial = this.addSpeedDial.bind(this);
     this.removeSpeedDial = this.removeSpeedDial.bind(this);
   }
@@ -46,27 +48,28 @@ class App extends Component {
     });
   }
 
-  addSpeedDial(dial) {
-    this.state.dials.custom.push(dial);
+  addSpeedDial(dial, index) {
+    if(index === undefined){
+      this.state.dials.custom.push(dial);
+    } else {
+      if (dial.custom) {
+        this.state.dials.custom.splice(index, 0, dial);
+      } else  {
+        this.state.dials.history.splice(index, 0, dial);
+      }
+    }
+
     this.setState({
       dials: this.state.dials
     });
   }
 
   removeSpeedDial(dial, index) {
-    //TODO I need to get index
-    console.log(index, "!!index");
     const isCustom = dial.custom;
     let dialType = isCustom ? 'custom' : 'history';
     let newItems = this.state.dials[dialType].filter((item) => {
       return item != dial;
     });
-
-    //dial.removedAt = index;
-    // this.state.removedSpeedDials.push(dial);
-    // this.setState({
-    //   removedSpeedDials: this.state.removedSpeedDials
-    // });
 
     var obj = this.state.dials;
     obj[dialType] = newItems;
@@ -99,7 +102,9 @@ class App extends Component {
               <SpeedDialsRow 
                 dials={this.state.dials.history} 
                 type="history"
-                removeSpeedDial={this.removeSpeedDial} />
+                removeSpeedDial={this.removeSpeedDial}
+                addSpeedDial={this.addSpeedDial}
+                getSpeedDials={this.getSpeedDials} />
               <SpeedDialsRow 
                 dials={this.state.dials.custom} 
                 type="custom"
