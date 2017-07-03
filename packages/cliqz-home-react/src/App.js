@@ -21,6 +21,7 @@ class App extends Component {
       }    
     };
     this.addSpeedDial = this.addSpeedDial.bind(this);
+    this.removeSpeedDial = this.removeSpeedDial.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +53,31 @@ class App extends Component {
     });
   }
 
+  removeSpeedDial(dial, index) {
+    //TODO I need to get index
+    console.log(index, "!!index");
+    const isCustom = dial.custom;
+    let dialType = isCustom ? 'custom' : 'history';
+    let newItems = this.state.dials[dialType].filter((item) => {
+      return item != dial;
+    });
+
+    //dial.removedAt = index;
+    // this.state.removedSpeedDials.push(dial);
+    // this.setState({
+    //   removedSpeedDials: this.state.removedSpeedDials
+    // });
+
+    var obj = this.state.dials;
+    obj[dialType] = newItems;
+   
+    this.setState({
+      dials: obj
+    });
+
+    this.freshtab.removeSpeedDial(dial);
+  }
+
   getNews() {
     this.freshtab.getNews().then((data) => {
       this.setState({
@@ -72,11 +98,13 @@ class App extends Component {
             <section id="top">
               <SpeedDialsRow 
                 dials={this.state.dials.history} 
-                type="history"/>
+                type="history"
+                removeSpeedDial={this.removeSpeedDial} />
               <SpeedDialsRow 
                 dials={this.state.dials.custom} 
                 type="custom"
-                addSpeedDial={this.addSpeedDial} />
+                addSpeedDial={this.addSpeedDial}
+                removeSpeedDial={this.removeSpeedDial} />
             </section>
 
             <section id="middle">

@@ -14,12 +14,17 @@ class AddSpeedDial extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleClick(event) {
     this.setState({
       show: !this.state.show
     });
+  }
+
+  handleDelete(event) {
+    console.log(event.target, "!!handleDelete");
   }
 
   handleChange(event) {

@@ -245,3 +245,29 @@ a.hideAddForm {
   border-radius: 3px;
   border: 0px;
 }
+
+.delete {
+  position: absolute;
+  top: 0%;
+  left: 28%;
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+  background: url("/delete-icon.svg") no-repeat;
+  cursor: pointer;
+  overflow:hidden;
+  text-indent:100%;
+  white-space:nowrap;
+  transition:opacity 0.3s ease-out 0.1s;
+  -webkit-transition: opacity 0.3s ease-out 0.1s;
+  -webkit-transition-delay: 1s;
+}
+
+.speed-dial-wrap:hover .delete {
+  opacity: 1;
+  transition:opacity 0.1s ease-out 0.2s;
+}
+
+.undoOptions {
+  height: 50px;
+}
