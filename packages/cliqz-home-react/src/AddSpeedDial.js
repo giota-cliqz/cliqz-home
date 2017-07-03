@@ -8,23 +8,20 @@ class AddSpeedDial extends Component {
     this.freshtab = cliqz.freshtab;
     this.state = {
       show: true,
-      value: ''
+      value: '',
+      errorDuplicate: false,
+      errorInvalid: false
     }
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleClick(event) {
     this.setState({
       show: !this.state.show
     });
-  }
-
-  handleDelete(event) {
-    console.log(event.target, "!!handleDelete");
   }
 
   handleChange(event) {
@@ -38,15 +35,28 @@ class AddSpeedDial extends Component {
       return;
     }
 
-    this.freshtab.addSpeedDial(url).then((dial) => {
-      this.setState({
-        value: ''
-      });
-      this.setState({
-        show: !this.state.show
-      });
+    return this.freshtab.addSpeedDial(url).then((resp) => {
+      if(resp.error) {
+        if(resp.reason === 'duplicate'){
+          this.setState({
+            errorDuplicate: true
+          });
+        } else {
+          this.setState({
+            errorInvalid: true
+          });
+        }
+      } else {
+        this.setState({
+          value: ''
+        });
+        this.setState({
+          show: !this.state.show
+        });
 
-      this.props.addSpeedDial(dial)
+        this.props.addSpeedDial(resp)
+      }
+      
     })
   }
 
@@ -89,6 +99,19 @@ class AddSpeedDial extends Component {
                    placeholder="Enter address"
                    value={this.state.value}
                    onChange={this.handleChange} />
+            {
+              this.state.errorDuplicate &&
+                <div className="notification">
+                  Already exists
+                </div>
+            }
+
+            {
+              this.state.errorInvalid &&
+                <div className="notification">
+                  Not valid
+                </div>
+            }
             <button type="submit">Add</button>
           </form>
         </ToggleDisplay>
