@@ -162,25 +162,24 @@ html, body, #app, #home {
   overflow: hidden; 
 }
 
-#app {
-  display: flex; 
+
+#home #nav-left, #home #nav-right {
+  width: 100px; 
 }
 
-#home {
+#home #content {
   width: 100%;
-  display: flex; }
-  #home #nav-left, #home #nav-right {
-    width: 100px; }
-  #home #content {
-    width: 100%;
-    flex: 1 0;
-    display: flex;
-    flex-direction: column; }
-    #home #content #top, #home #content #bottom {
-      flex: 1 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center; }
+  flex: 1 0;
+  display: flex;
+  flex-direction: column; 
+}
+
+#home #content #top, #home #content #bottom {
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
 
 .logo {
   text-indent: -10em;
@@ -199,4 +198,104 @@ html, body, #app, #home {
   background-repeat: no-repeat;
   background-size: contain;
   box-sizing: border-box;
-  font-family: Helvetica, sans; }
+  font-family: Helvetica, sans; 
+}
+
+ #home {
+  display: flex;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  position: relative;
+}
+
+#flexContainer {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+#notificationsBox {
+  flex: 0 0 auto;
+  background-color: #506275;
+  color: #ffffff;
+  width: 100%;
+  padding: 20px;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+}
+
+#notificationsBox .notificationsCon {
+  width: 100%;
+  max-width: 960px;
+  padding: 0 20px 0 30px;
+  margin: 0 auto;
+  cursor: default !important;
+}
+
+#notificationsBox  .close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+#notificationsBox h1 {
+  color: #ffffff;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+#notificationsBox img.logo {
+  float: left;
+  margin-left: -40px;
+  cursor: default !important;
+}
+
+#notificationsBox .text {
+  padding: 0 20px 0 40px;
+  font-size: 14px;
+  float: left;
+  width: calc(100% - 400px);
+}
+
+#notificationsBox .text.fullWidth {
+  width: 100%;
+  padding-right: 0;
+}
+
+#notificationsBox a {
+  color: #8BE0E7;
+}
+
+#notificationsBox .buttons {
+  float: left;
+  width: 400px;
+}
+
+#notificationsBox .buttons .button {
+  width: 200px;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #CFCFCF;
+  cursor: pointer !important;
+}
+
+#notificationsBox .button.enable {
+  color: #506275;
+  float: left;
+}
+
+#notificationsBox .button.disable {
+  color: #F7F7F7;
+  background: transparent;
+  float: left;
+}
+
+.clearfix:after {
+  clear: both;
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+}

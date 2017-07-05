@@ -3,12 +3,16 @@ import cliqz from './Cliqz';
 import UrlBar from './UrlBar';
 import SpeedDials from './SpeedDials';
 import News from './News';
+import MessageCenter from './MessageCenter';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props); 
     this.freshtab = cliqz.freshtab;
+    cliqz.setStorage({
+      setState: this.setState.bind(this),
+    })
     this.state = {
       config: {},
       dials: {
@@ -17,8 +21,9 @@ class App extends Component {
       },
       news: {
         version: '',
-        data: []
-      }    
+        data: [],
+      },
+      messages: {}   
     };
   }
 
@@ -29,7 +34,10 @@ class App extends Component {
   }
 
   getConfig() {
-    this.freshtab.getConfig().then(config => {
+    this.freshtab.getConfig().then(config => { 
+      this.setState({
+        messages: config.messages
+      });
       this.setState({
         config: config
       });
@@ -58,6 +66,10 @@ class App extends Component {
   render() {
     return (
       <div id="app">
+        <div id="flexContainer">
+          <MessageCenter position="top" messages={this.state.messages} /> 
+        </div>
+        
         <div id="home">
           <nav id="nav-left"></nav>
           <section id="content">
@@ -67,6 +79,8 @@ class App extends Component {
 
             <section id="middle">
               <UrlBar />
+              <MessageCenter position="middle" messages={this.state.messages} /> 
+
             </section>
 
             <section id="bottom">
